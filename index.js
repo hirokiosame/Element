@@ -41,6 +41,11 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.off = function off(eventName, eventCallback){
+		this._.removeEventListener(eventName, eventCallback);
+		return this;
+	};
+
 	E.prototype.append = function append(){
 
 		var args = [].slice.apply(arguments);
