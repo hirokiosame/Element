@@ -87,7 +87,7 @@ module.exports = (function(){
 				if( typeof _opts._text === "string" ){
 
 					instance._text = document.createElement(_opts._text);
-					el.appendChild( instance._text );
+					instance._.appendChild( instance._text );
 				}
 
 				// Inner text
@@ -103,7 +103,7 @@ module.exports = (function(){
 				// Set everything else as an attribute
 				for( var at in _opts ){
 					if( _opts[at] ){
-						el.setAttribute(at, _opts[at]);
+						instance._.setAttribute(at, _opts[at]);
 					}
 				}
 			}
