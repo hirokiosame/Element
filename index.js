@@ -37,7 +37,7 @@ module.exports = (function(){
 	};
 
 	E.prototype.on = function on(eventName, eventCallback){
-		this._.addEventListener(eventName, eventCallback);
+		this._.addEventListener(eventName, eventCallback, false);
 		return this;
 	};
 
