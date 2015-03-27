@@ -73,38 +73,43 @@ module.exports = (function(){
 		var instance = new E();
 
 		// el is a string
-		// Create it
 		if( typeof el === "string" ){
 
-			el = document.createElement(el);
+			// Create element
+			instance._ = document.createElement(el);
 
 			if( typeof opts === "object" ){
 
 				var _opts = Object.create(opts);
 
-				if( typeof _opts.text === "string" ){
-					el.textContent = _opts.text;
-					_opts.text = null;
-				}
 
+				// Text container element
 				if( typeof _opts._text === "string" ){
 
 					instance._text = document.createElement(_opts._text);
 					el.appendChild( instance._text );
 				}
 
+				// Inner text
+				if( typeof _opts.text === "string" ){
+					instance.text(_opts.text);
+				}
+
+				// Inner HTML
+				if( typeof _opts.html === "string" ){
+					instance._.innerHTML = _opts.html;
+				}
+
+				// Set everything else as an attribute
 				for( var at in _opts ){
 					if( _opts[at] ){
 						el.setAttribute(at, _opts[at]);
 					}
 				}
 			}
+		}else{
+			instance._ = el;
 		}
-
-		// el is an Element
-
-		instance._ = el;
-
 
 		return instance;
 	};
