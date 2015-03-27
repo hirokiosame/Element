@@ -65,7 +65,7 @@ module.exports = (function(){
 
 	return function (el, opts){
 
-		var instance = new E;
+		var instance = new E();
 
 		// el is a string
 		// Create it
