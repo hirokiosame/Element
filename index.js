@@ -67,6 +67,12 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.remove = function(){
+		if( !this._.parentNode ){ return; }
+		this._.parentNode.removeChild(this._);
+
+		return this;
+	};
 
 	return function (el, opts){
 
