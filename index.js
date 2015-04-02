@@ -46,9 +46,10 @@ module.exports = (function(){
 		return this;
 	};
 
-	E.prototype.append = function append(){
+	E.prototype.append = function append(arr){
 
-		var args = [].slice.apply(arguments);
+		var args = arr instanceof Array ? arr : arguments;
+		
 		for( var i = 0; i < args.length; i++ ){
 			this._.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
 		}
