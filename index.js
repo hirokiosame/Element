@@ -36,6 +36,7 @@ module.exports = (function(){
 		return this;
 	};
 
+
 	E.prototype.on = function on(eventName, eventCallback){
 		this._.addEventListener(eventName, eventCallback, false);
 		return this;
@@ -46,10 +47,18 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.one = function one(eventName, eventCallback){
+		var self = this;
+		this.on(eventName, function(){
+			self.off(eventName);
+			eventCallback.apply(this, [].slice.apply(arguments));
+		});
+	};
+
 	E.prototype.append = function append(arr){
 
 		var args = arr instanceof Array ? arr : arguments;
-		
+
 		for( var i = 0; i < args.length; i++ ){
 			this._.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
 		}
