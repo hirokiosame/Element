@@ -49,7 +49,7 @@ module.exports = (function(){
 
 	E.prototype.one = function one(eventName, eventCallback){
 		var self = this;
-		this.on(eventName, function(){
+		return this.on(eventName, function(){
 			self.off(eventName);
 			eventCallback.apply(this, [].slice.apply(arguments));
 		});
