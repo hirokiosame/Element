@@ -36,7 +36,6 @@ module.exports = (function(){
 		return this;
 	};
 
-
 	E.prototype.on = function on(eventName, eventCallback){
 		this._.addEventListener(eventName, eventCallback, false);
 		return this;
@@ -73,6 +72,17 @@ module.exports = (function(){
 		}else{
 			this._.textContent = textContent;	
 		}
+
+		return this;
+	};
+
+	E.prototype.attr = function(name, value){
+
+		if( typeof name !== "string" ){ throw new Error("An attribute name is required"); }
+
+		if( typeof value !== "string" ){ return this._.getAttribute(name); }
+
+		this._.setAttribute(name, value);
 
 		return this;
 	};
@@ -114,6 +124,11 @@ module.exports = (function(){
 				// Inner HTML
 				if( typeof _opts.html === "string" ){
 					instance._.innerHTML = _opts.html;
+				}
+
+				// Add Class
+				if( typeof _opts.class === "string" ){
+					instance.addClass(_opts.class);
 				}
 
 				// Set everything else as an attribute
