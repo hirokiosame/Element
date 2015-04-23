@@ -41,7 +41,7 @@ module.exports = (function(){
 		useCapture = !!useCapture;
 		eventNames = eventNames.split(" ");
 
-		for( var i = 0, len = eventNames.length, i < len; i++ ){
+		for( var i = 0, len = eventNames.length; i < len; i++ ){
 			this._.addEventListener(eventNames[i], eventCallback, useCapture);
 		}
 
@@ -52,7 +52,7 @@ module.exports = (function(){
 
 		eventNames = eventNames.split(" ");
 
-		for( var i = 0, len = eventNames.length, i < len; i++ ){
+		for( var i = 0, len = eventNames.length; i < len; i++ ){
 			this._.removeEventListener(eventNames[i], eventCallback);
 		}
 
