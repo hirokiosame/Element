@@ -36,13 +36,26 @@ module.exports = (function(){
 		return this;
 	};
 
-	E.prototype.on = function on(eventName, eventCallback){
-		this._.addEventListener(eventName, eventCallback, false);
+	E.prototype.on = function on(eventNames, eventCallback, useCapture){
+
+		useCapture = !!useCapture;
+		eventNames = eventNames.split(" ");
+
+		for( var i = 0, len = eventNames.length, i < len; i++ ){
+			this._.addEventListener(eventNames[i], eventCallback, useCapture);
+		}
+
 		return this;
 	};
 
-	E.prototype.off = function off(eventName, eventCallback){
-		this._.removeEventListener(eventName, eventCallback);
+	E.prototype.off = function off(eventNames, eventCallback){
+
+		eventNames = eventNames.split(" ");
+
+		for( var i = 0, len = eventNames.length, i < len; i++ ){
+			this._.removeEventListener(eventNames[i], eventCallback);
+		}
+
 		return this;
 	};
 
@@ -58,7 +71,7 @@ module.exports = (function(){
 
 		var args = arr instanceof Array ? arr : arguments;
 
-		for( var i = 0; i < args.length; i++ ){
+		for( var i = 0, len = args.length; i < len; i++ ){
 			this._.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
 		}
 
