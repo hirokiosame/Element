@@ -80,12 +80,14 @@ module.exports = (function(){
 
 	E.prototype.text = function text(textContent, append){
 
-		// textContent is faster than innerText
 
 		var el = this.textWrap || this._;
 
 		// Change text
-		el.textContent = (append ? el.textContent : "") + textContent;
+		// textContent is faster than innerText
+		// but textContent isn't aware of style
+		// line breaks dont work
+		el.innerText = (append ? el.innerText : "") + textContent;
 
 		return this;
 	};
