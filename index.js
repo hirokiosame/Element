@@ -80,7 +80,6 @@ module.exports = (function(){
 
 	E.prototype.text = function text(textContent, append){
 
-
 		var el = this.textWrap || this._;
 
 		// Change text
