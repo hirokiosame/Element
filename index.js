@@ -82,11 +82,19 @@ module.exports = (function(){
 
 		var el = this.textWrap || this._;
 
-		// Change text
+		// Change text  
 		// textContent is faster than innerText
 		// but textContent isn't aware of style
 		// line breaks dont work
 		el.innerText = (append ? el.innerText : "") + textContent;
+
+		return this;
+	};
+
+	E.prototype.html = function html(htmlContent, append){
+
+		// Change html
+		this._.innerHTML = (append ? el.innerHTML : "") + htmlContent;
 
 		return this;
 	};
@@ -139,7 +147,7 @@ module.exports = (function(){
 
 				// Inner HTML
 				if( typeof _opts.html === "string" ){
-					instance._.innerHTML = _opts.html;
+					instance.html(_opts.html);
 				}
 
 				// Add Class
