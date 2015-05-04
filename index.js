@@ -141,7 +141,7 @@ module.exports = (function(){
 				}
 
 				// Inner text
-				if( typeof _opts.text === "string" ){
+				if( _opts.text !== undefind && opts.text !== null ){
 					instance.text(_opts.text);
 				}
 
