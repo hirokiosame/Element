@@ -94,7 +94,7 @@ module.exports = (function(){
 	E.prototype.html = function html(htmlContent, append){
 
 		// Change html
-		this._.innerHTML = (append ? el.innerHTML : "") + htmlContent;
+		this._.innerHTML = (append ? this._.innerHTML : "") + htmlContent;
 
 		return this;
 	};
