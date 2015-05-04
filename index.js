@@ -78,16 +78,18 @@ module.exports = (function(){
 		return this;
 	};
 
-	E.prototype.text = function text(textContent){
+	E.prototype.text = function text(textContent, append){
 
-		if( this._text ){
-			this._text.textContent = textContent;
-		}else{
-			this._.textContent = textContent;	
-		}
+		// textContent is faster than innerText
+
+		var el = this.textWrap || this._;
+
+		// Change text
+		el.textContent = (append ? el.textContent : "") + textContent;
 
 		return this;
 	};
+
 
 	E.prototype.attr = function(name, value){
 
@@ -123,10 +125,10 @@ module.exports = (function(){
 
 
 				// Text container element
-				if( typeof _opts._text === "string" ){
+				if( typeof _opts.textWrap === "string" ){
 
-					instance._text = document.createElement(_opts._text);
-					instance._.appendChild( instance._text );
+					instance.textWrap = document.createElement(_opts.textWrap);
+					instance._.appendChild( instance.textWrap );
 				}
 
 				// Inner text
