@@ -80,12 +80,14 @@ module.exports = (function(){
 
 	E.prototype.replaceWith = function replaceWith(el){
 
-		if( !this._.parentNode ){
-			this._ = el instanceof E ? el._ : el;
-			return this;
+		el = el instanceof E ? el._ : el;
+
+		if( this._.parentNode ){
+			this._.parentNode.replaceChild(el, this._);
 		}
 
-		this._.parentNode.replaceChild(el instanceof E ? el._ : el, this._);
+		this._ = el;
+
 		return this;
 	};
 
