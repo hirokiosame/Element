@@ -78,6 +78,17 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.replaceWith = function replaceWith(el){
+
+		if( !this._.parentNode ){
+			this._ = el instanceof E ? el._ : el;
+			return this;
+		}
+
+		this._.parentNode.replaceChild(el instanceof E ? el._ : el, this._);
+		return this;
+	};
+
 	E.prototype.text = function text(textContent, append){
 
 		var el = this.textWrap || this._;
