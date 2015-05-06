@@ -99,7 +99,9 @@ module.exports = (function(){
 		// textContent is faster than innerText
 		// but textContent isn't aware of style
 		// line breaks dont work
-		el.innerText = (append ? el.innerText : "") + textContent;
+
+		// Back to textContent - firefox doesn't support innertext...
+		el.textContent = (append ? el.textContent : "") + textContent;
 
 		return this;
 	};
