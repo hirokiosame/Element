@@ -133,6 +133,16 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.trigger = function trigger(eventName){
+
+		var evnt = document.createEvent('HTMLEvents');
+			evnt.initEvent(eventName, true, false);
+
+		this._.dispatchEvent(evnt);
+
+		return this;
+	};
+
 	return function (el, opts){
 
 		var instance = new E();
@@ -153,21 +163,25 @@ module.exports = (function(){
 
 					instance.textWrap = document.createElement(_opts.textWrap);
 					instance._.appendChild( instance.textWrap );
+					_opts.textWrap = null;
 				}
 
 				// Inner text
 				if( _opts.text !== undefined && opts.text !== null ){
 					instance.text(_opts.text);
+					_opts.text = null;
 				}
 
 				// Inner HTML
 				if( typeof _opts.html === "string" ){
 					instance.html(_opts.html);
+					_opts.html = null;
 				}
 
 				// Add Class
 				if( typeof _opts.class === "string" ){
 					instance.addClass(_opts.class);
+					_opts.class = null;
 				}
 
 				// Set everything else as an attribute
