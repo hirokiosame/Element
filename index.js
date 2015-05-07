@@ -1,7 +1,9 @@
 module.exports = (function(){
 	'use strict';
 
-	function E(){}
+	function E(lement){
+		this._ = lement;
+	}
 
 	E.prototype.addClass = function addClass(className){
 		var split = className.split(" ");
@@ -178,10 +180,10 @@ module.exports = (function(){
 
 
 	E.prototype.prev = function prev(){
-		return E(this._.previousSibling);
+		return new E(this._.previousSibling);
 	};
 	E.prototype.next = function next(){
-		return E(this._.nextSibling);
+		return new E(this._.nextSibling);
 	};
 
 	return function (el, opts){
