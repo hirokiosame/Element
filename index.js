@@ -176,6 +176,14 @@ module.exports = (function(){
 		return this;
 	};
 
+
+	E.prototype.prev = function prev(){
+		return E(this._.previousSibling);
+	};
+	E.prototype.next = function next(){
+		return E(this._.nextSibling);
+	};
+
 	return function (el, opts){
 
 		var instance = new E();
