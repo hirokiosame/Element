@@ -115,7 +115,7 @@ module.exports = (function(){
 	};
 
 
-	E.prototype.attr = function(name, value){
+	E.prototype.attr = function attr(name, value){
 
 		if( typeof name !== "string" ){ throw new Error("An attribute name is required"); }
 
@@ -126,9 +126,36 @@ module.exports = (function(){
 		return this;
 	};
 
-	E.prototype.remove = function(){
+	E.prototype.remove = function remove(){
 		if( !this._.parentNode ){ return; }
 		this._.parentNode.removeChild(this._);
+
+		return this;
+	};
+
+
+	E.prototype.offset = function offset(top, left){
+
+		this._.style.top = top;
+		this._.style.left = left;
+		
+		return this;
+	};
+
+	E.prototype.css = function css(name, value){
+
+		if( typeof name === "string"){
+			if( typeof value === "string" ){
+				this._.style[name] = value;
+			}else{
+				return getComputedStyle(this._)[name];
+			}
+		}
+		else if( name instanceof Object ){
+			for( var prop in name ){
+				this._.style[prop] = name[prop];
+			}
+		}
 
 		return this;
 	};
