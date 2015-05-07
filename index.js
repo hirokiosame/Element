@@ -99,6 +99,8 @@ module.exports = (function(){
 
 		var el = this.textWrap || this._;
 
+		if( arguments.length === 0 ){ return el.textContent; }
+
 		// Change text  
 		// textContent is faster than innerText
 		// but textContent isn't aware of style
