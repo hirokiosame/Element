@@ -36,6 +36,10 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.shown = function shown(){
+		return this._.style.display !== "none";
+	};
+
 	E.prototype.on = function on(eventNames, eventCallback, useCapture){
 
 		useCapture = !!useCapture;
@@ -138,7 +142,7 @@ module.exports = (function(){
 
 		this._.style.top = top;
 		this._.style.left = left;
-		
+
 		return this;
 	};
 
