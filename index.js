@@ -180,10 +180,14 @@ module.exports = (function(){
 
 
 	E.prototype.prev = function prev(){
-		return new E(this._.previousSibling);
+		if( this._.previousSibling ){
+			return new E(this._.previousSibling);	
+		}
 	};
 	E.prototype.next = function next(){
-		return new E(this._.nextSibling);
+		if( this._.nextSibling ){
+			return new E(this._.nextSibling);	
+		}
 	};
 
 	return function (el, opts){
