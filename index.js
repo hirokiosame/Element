@@ -186,6 +186,9 @@ module.exports = (function(){
 
 	return function (el, opts){
 
+		// Ignore if already an instance
+		if( el instanceof E ){ return el; }
+
 		var instance = new E();
 
 		// el is a string
