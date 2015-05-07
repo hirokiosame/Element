@@ -170,8 +170,7 @@ module.exports = (function(){
 
 	E.prototype.trigger = function trigger(eventName){
 
-		var evnt = document.createEvent('HTMLEvents');
-			evnt.initEvent(eventName, true, false);
+		var evnt = new Event(eventName);
 
 		this._.dispatchEvent(evnt);
 
