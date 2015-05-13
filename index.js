@@ -44,11 +44,20 @@ module.exports = (function(){
 
 	E.prototype.on = function on(eventNames, eventCallback, useCapture){
 
+		if( !(this._events instanceof Object) ){ this._events = {}; }
+
 		useCapture = !!useCapture;
 		eventNames = eventNames.split(" ");
 
-		for( var i = 0, len = eventNames.length; i < len; i++ ){
-			this._.addEventListener(eventNames[i], eventCallback, useCapture);
+		var i = eventNames.length;
+		while( i-- ){
+			var eName = eventNames[i];
+
+			// Keep track of event listeners for future removal
+			if( this._events[eName] instanceof Array ){ this._events[eName] = []; }
+			this._events[eName].push(eventCallback);
+
+			this._.addEventListener(eName, eventCallback, useCapture);
 		}
 
 		return this;
@@ -56,10 +65,35 @@ module.exports = (function(){
 
 	E.prototype.off = function off(eventNames, eventCallback){
 
+		if( !(this._events instanceof Object) ){ this._events = {}; }
+
 		eventNames = eventNames.split(" ");
 
-		for( var i = 0, len = eventNames.length; i < len; i++ ){
-			this._.removeEventListener(eventNames[i], eventCallback);
+		var i = eventNames.length;
+
+		// Remove particular event listener
+		if( eventCallback instanceof Function ){
+
+			while( i-- ){
+				var eName = eventNames[i];
+
+				this._events[eName] instanceof Array && this._events[eName].splice(this._events[eName].indexOf(eventCallback), 1);
+
+				this._.removeEventListener(eName, eventCallback);
+			}
+		}
+
+		// Remove all event listeners
+		else{
+			while( i-- ){
+				var eName = eventNames[i];
+				if( !(this._events[eName] instanceof Array) ){ continue; }
+
+				var cb;
+				while( cb = this._events[eName].pop() ){
+					this._.removeEventListener(eName, cb);
+				}
+			}
 		}
 
 		return this;
