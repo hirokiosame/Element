@@ -127,7 +127,7 @@ module.exports = (function(){
 
 		if( typeof name !== "string" ){ throw new Error("An attribute name is required"); }
 
-		if( typeof value !== "string" ){ return this._.getAttribute(name); }
+		if( value === undefined ){ return this._.getAttribute(name); }
 
 		this._.setAttribute(name, value);
 
@@ -177,16 +177,29 @@ module.exports = (function(){
 		return this;
 	};
 
-
 	E.prototype.prev = function prev(){
 		if( this._.previousSibling ){
 			return new E(this._.previousSibling);	
 		}
 	};
+
 	E.prototype.next = function next(){
 		if( this._.nextSibling ){
 			return new E(this._.nextSibling);	
 		}
+	};
+
+	E.prototype.data = function data(key, value){
+
+		if( !(this._data instanceof Object) ){ this._data = {}; }
+
+		if( value === undefined ){
+			return this._data[key];
+		}
+
+		this._data[key] = value;
+
+		return this;
 	};
 
 	return function (el, opts){
