@@ -54,7 +54,7 @@ module.exports = (function(){
 			var eName = eventNames[i];
 
 			// Keep track of event listeners for future removal
-			if( this._events[eName] instanceof Array ){ this._events[eName] = []; }
+			if( !(this._events[eName] instanceof Array) ){ this._events[eName] = []; }
 			this._events[eName].push(eventCallback);
 
 			this._.addEventListener(eName, eventCallback, useCapture);
@@ -77,7 +77,9 @@ module.exports = (function(){
 			while( i-- ){
 				var eName = eventNames[i];
 
-				this._events[eName] instanceof Array && this._events[eName].splice(this._events[eName].indexOf(eventCallback), 1);
+				if( !(this._events[eName] instanceof Array) ){ continue; }
+
+				this._events[eName].splice(this._events[eName].indexOf(eventCallback), 1);
 
 				this._.removeEventListener(eName, eventCallback);
 			}
