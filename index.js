@@ -79,7 +79,9 @@ module.exports = (function(){
 
 				if( !(this._events[eName] instanceof Array) ){ continue; }
 
-				this._events[eName].splice(this._events[eName].indexOf(eventCallback), 1);
+				var idx = this._events[eName].indexOf(eventCallback);
+
+				if( idx !== -1 ){ this._events[eName].splice(idx, 1); }
 
 				this._.removeEventListener(eName, eventCallback);
 			}
