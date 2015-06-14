@@ -115,9 +115,14 @@ module.exports = (function(){
 
 		var args = arr instanceof Array ? arr : arguments;
 
+		// To avoid reflows
+		var container = document.createDocumentFragment();
+
 		for( var i = 0, len = args.length; i < len; i++ ){
-			this._.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
+			container.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
 		}
+
+		this._.appendChild(container);
 
 		return this;
 	};
