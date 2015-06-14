@@ -226,7 +226,7 @@ module.exports = (function(){
 			// (+0 === -0 but Infinity =/= -Infinity)
 			if( (1/caretStart) === -Infinity ){ caretStart = this._.value.length; }
 
-			if( typeof caretEnd !== "number" ){ caretEnd = 0; }
+			if( typeof caretEnd !== "number" ){ caretEnd = caretStart; }
 
 			try{
 				this._.setSelectionRange( caretStart, caretEnd );
