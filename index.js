@@ -215,6 +215,28 @@ module.exports = (function(){
 		return this;
 	};
 
+	E.prototype.focus = function focus(caretStart, caretEnd){
+		
+	 	// Focus element
+		this._.focus();
+
+		if( typeof caretStart === "number" ){
+
+			// If start is -0, set at the very end
+			// (+0 === -0 but Infinity =/= -Infinity)
+			if( (1/caretStart) === -Infinity ){ caretStart = this._.value.length; }
+
+			if( typeof caretEnd !== "number" ){ caretEnd = 0; }
+
+			try{
+				this._.setSelectionRange( caretStart, caretEnd );
+			}
+			catch(err){}
+		}
+
+		return this;
+	};
+
 	E.prototype.prev = function prev(){
 		if( this._.previousSibling ){
 			return new E(this._.previousSibling);	
