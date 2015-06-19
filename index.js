@@ -39,7 +39,9 @@ module.exports = (function(){
 	};
 
 	E.prototype.shown = function shown(){
-		return this._.style.display !== "none";
+		return
+			( this._ === document ) || ( this._ === document.documentElement ) ||
+			( this._.style.display !== "none" && this._.parentNode !== null );
 	};
 
 	E.prototype.on = function on(eventNames, eventCallback, useCapture){
