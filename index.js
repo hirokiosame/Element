@@ -117,10 +117,15 @@ module.exports = (function(){
 		var args = arr instanceof Array ? arr : arguments;
 
 		// To avoid reflows
-		var container = document.createDocumentFragment();
+		var container = document.createDocumentFragment(),
+			el;
 
 		for( var i = 0, len = args.length; i < len; i++ ){
-			container.appendChild( args[i] instanceof E ? args[i]._ : args[i] );
+			if( typeof args[i] === "string" ){ el = document.createTextNode(args[i]); }
+			else if( args[i] instanceof E ){ el = args[i]._; }
+			else{ el = args[i]; }
+			
+			container.appendChild( el );
 		}
 
 		this._.appendChild(container);
