@@ -163,10 +163,15 @@ module.exports = (function(){
 		return this;
 	};
 
-	E.prototype.html = function html(htmlContent, append){
+	E.prototype.html = function html(newContent, append){
 
 		// Change html
-		this._.innerHTML = (append ? this._.innerHTML : "") + htmlContent;
+		if( newContent instanceof E ){
+			this._.innerHTML = "";
+			this.append(newContent);
+		}else{
+			this._.innerHTML = (append ? this._.innerHTML : "") + newContent;
+		}
 
 		return this;
 	};
